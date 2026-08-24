@@ -168,17 +168,17 @@ const INSTANCES = [
   x: 390,
   y: 170
 },
-// garage corner (bottom of right wall): 2E, 2A stacked
+// garage corner (bottom of right wall, shallower than main house — garage front is set back): 2E, 2A stacked
 {
   uid: "2E-1",
   group: "2E",
   x: 378,
-  y: 222
+  y: 193
 }, {
   uid: "2A-2",
   group: "2A",
   x: 402,
-  y: 232
+  y: 203
 },
 // entry left post: 2G, 2A stacked
 {
@@ -660,7 +660,13 @@ function BarnwellJob() {
       border: "1px solid #e5e7eb"
     }
   }, /*#__PURE__*/React.createElement("polyline", {
-    points: "70,100 195,100 195,114 390,114 390,230 230,230 230,200 185,200 185,230 70,230",
+    points: "70,100 195,100 195,114 390,114 390,200 240,200",
+    fill: "none",
+    stroke: "#111827",
+    strokeWidth: "3",
+    strokeLinejoin: "round"
+  }), /*#__PURE__*/React.createElement("polyline", {
+    points: "185,230 70,230",
     fill: "none",
     stroke: "#111827",
     strokeWidth: "3",
@@ -675,20 +681,34 @@ function BarnwellJob() {
   }), /*#__PURE__*/React.createElement("line", {
     x1: "185",
     y1: "200",
-    x2: "230",
+    x2: "185",
+    y2: "230",
+    stroke: "#111827",
+    strokeWidth: "3"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "240",
+    y1: "200",
+    x2: "240",
+    y2: "230",
+    stroke: "#111827",
+    strokeWidth: "3"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "185",
+    y1: "200",
+    x2: "240",
     y2: "200",
     stroke: "#9ca3af",
     strokeWidth: "2",
     strokeDasharray: "6,5"
   }), /*#__PURE__*/React.createElement("text", {
-    x: "207",
+    x: "212",
     y: "192",
     fontSize: "9",
     textAnchor: "middle",
     fill: "#6b7280"
   }, "ENTRY"), /*#__PURE__*/React.createElement("text", {
-    x: "330",
-    y: "175",
+    x: "315",
+    y: "185",
     fontSize: "11",
     textAnchor: "middle",
     fill: "#6b7280"
