@@ -6,7 +6,6 @@
 <title>AGPEST — 2937 E. Barnwell St</title>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
   html, body { margin:0; padding:0; background:#f3f4f6; }
   #root { min-height:100vh; }
@@ -40,8 +39,10 @@
   };
 </script>
 
-<script type="text/babel" data-presets="react">
-const { useState } = React;
+<script>
+const {
+  useState
+} = React;
 
 // Repair-item groups — matches AGPEST report Section I line items / cost sheet
 const GROUPS = {
@@ -51,13 +52,9 @@ const GROUPS = {
     label: "Drywood Termite",
     location: "Fascia",
     finding: "Evidence of drywood termite damage in fascia.",
-    repair: [
-      "Fumigate structure with sulfuryl fluoride for eradication.",
-      "Remove/cover accessible evidence (alates, wings, fecal pellets).",
-      "Remove, replace, repair or reinforce damaged wood members as necessary.",
-    ],
+    repair: ["Fumigate structure with sulfuryl fluoride for eradication.", "Remove/cover accessible evidence (alates, wings, fecal pellets).", "Remove, replace, repair or reinforce damaged wood members as necessary."],
     cost: 1985,
-    note: "4 marked spots — top-left corner, garage corner, and both entry posts. This is the billable line item; fumigation for 2B–2G is included here.",
+    note: "4 marked spots — top-left corner, garage corner, and both entry posts. This is the billable line item; fumigation for 2B–2G is included here."
   },
   "2B": {
     type: "dry",
@@ -65,14 +62,10 @@ const GROUPS = {
     label: "Drywood Termite",
     location: "Rafter Tail(s)",
     finding: "Evidence of drywood termite damage in rafter tail(s).",
-    repair: [
-      "Fumigate structure with sulfuryl fluoride for eradication.",
-      "Remove/cover accessible evidence (alates, wings, fecal pellets).",
-      "Remove, replace, repair or reinforce damaged wood members as necessary.",
-    ],
+    repair: ["Fumigate structure with sulfuryl fluoride for eradication.", "Remove/cover accessible evidence (alates, wings, fecal pellets).", "Remove, replace, repair or reinforce damaged wood members as necessary."],
     cost: null,
     costNote: "Fumigation included with 2A",
-    note: "4 marked spots — top-left corner, top jog corner, and two near the support-beam/entry cluster.",
+    note: "4 marked spots — top-left corner, top jog corner, and two near the support-beam/entry cluster."
   },
   "2C": {
     type: "dry",
@@ -80,14 +73,10 @@ const GROUPS = {
     label: "Drywood Termite",
     location: "Ridge Board",
     finding: "Evidence of drywood termite damage in ridge board.",
-    repair: [
-      "Fumigate structure with sulfuryl fluoride for eradication.",
-      "Remove/cover accessible evidence (alates, wings, fecal pellets).",
-      "Remove, replace, repair or reinforce damaged wood members as necessary.",
-    ],
+    repair: ["Fumigate structure with sulfuryl fluoride for eradication.", "Remove/cover accessible evidence (alates, wings, fecal pellets).", "Remove, replace, repair or reinforce damaged wood members as necessary."],
     cost: null,
     costNote: "Fumigation included with 2A",
-    note: "1 marked spot, right wall.",
+    note: "1 marked spot, right wall."
   },
   "2D": {
     type: "dry",
@@ -95,14 +84,10 @@ const GROUPS = {
     label: "Drywood Termite",
     location: "Beam",
     finding: "Evidence of drywood termite damage in beam.",
-    repair: [
-      "Fumigate structure with sulfuryl fluoride for eradication.",
-      "Remove/cover accessible evidence (alates, wings, fecal pellets).",
-      "Remove, replace, repair or reinforce damaged wood members as necessary.",
-    ],
+    repair: ["Fumigate structure with sulfuryl fluoride for eradication.", "Remove/cover accessible evidence (alates, wings, fecal pellets).", "Remove, replace, repair or reinforce damaged wood members as necessary."],
     cost: null,
     costNote: "Fumigation included with 2A",
-    note: "2 marked spots — flagged on report diagram as \"REPLACE SUPPORT BEAM,\" near the entry/garage cluster.",
+    note: "2 marked spots — flagged on report diagram as \"REPLACE SUPPORT BEAM,\" near the entry/garage cluster."
   },
   "2E": {
     type: "dry",
@@ -110,14 +95,10 @@ const GROUPS = {
     label: "Drywood Termite",
     location: "Decorative Fascia",
     finding: "Evidence of drywood termite damage in decorative fascia.",
-    repair: [
-      "Fumigate structure with sulfuryl fluoride for eradication.",
-      "Remove/cover accessible evidence (alates, wings, fecal pellets).",
-      "Remove, replace, repair or reinforce damaged wood members as necessary.",
-    ],
+    repair: ["Fumigate structure with sulfuryl fluoride for eradication.", "Remove/cover accessible evidence (alates, wings, fecal pellets).", "Remove, replace, repair or reinforce damaged wood members as necessary."],
     cost: null,
     costNote: "Fumigation included with 2A",
-    note: "5 marked spots — 4 along the bottom wall (flagged on report diagram as \"REPLACE DAMAGED DECORATIVE FASCIA\") and 1 at the garage corner.",
+    note: "5 marked spots — 4 along the bottom wall (flagged on report diagram as \"REPLACE DAMAGED DECORATIVE FASCIA\") and 1 at the garage corner."
   },
   "2F": {
     type: "dry",
@@ -125,13 +106,10 @@ const GROUPS = {
     label: "Drywood Termite",
     location: "Garage Framing",
     finding: "Evidence of drywood termites noted in garage framing.",
-    repair: [
-      "Fumigate structure with sulfuryl fluoride for eradication.",
-      "Remove/cover accessible evidence (alates, wings, fecal pellets).",
-    ],
+    repair: ["Fumigate structure with sulfuryl fluoride for eradication.", "Remove/cover accessible evidence (alates, wings, fecal pellets)."],
     cost: null,
     costNote: "Fumigation included with 2A",
-    note: "1 marked spot along the bottom wall, within the \"REPLACE DAMAGED DECORATIVE FASCIA\" callout zone. No wood repair called out for this item — evidence removal only.",
+    note: "1 marked spot along the bottom wall, within the \"REPLACE DAMAGED DECORATIVE FASCIA\" callout zone. No wood repair called out for this item — evidence removal only."
   },
   "2G": {
     type: "dry",
@@ -139,14 +117,10 @@ const GROUPS = {
     label: "Drywood Termite",
     location: "Rafter Tail in Void at Lower Roof",
     finding: "Evidence of drywood termite damage in rafter tail, in void at lower roof.",
-    repair: [
-      "Fumigate structure with sulfuryl fluoride for eradication.",
-      "Remove/cover accessible evidence (alates, wings, fecal pellets).",
-      "Remove, replace, repair or reinforce damaged wood members as necessary.",
-    ],
+    repair: ["Fumigate structure with sulfuryl fluoride for eradication.", "Remove/cover accessible evidence (alates, wings, fecal pellets).", "Remove, replace, repair or reinforce damaged wood members as necessary."],
     cost: null,
     costNote: "Fumigation included with 2A",
-    note: "1 marked spot, entry left post.",
+    note: "1 marked spot, entry left post."
   },
   "3A": {
     type: "fungus",
@@ -154,138 +128,206 @@ const GROUPS = {
     label: "Fungus / Dryrot",
     location: "Fascia",
     finding: "Fungus, dry/rot infection and damage to the fascia.",
-    repair: [
-      "Remove, scrape and/or cut out infected wood members.",
-      "Repair, replace, or reinforce damaged wood as necessary.",
-    ],
+    repair: ["Remove, scrape and/or cut out infected wood members.", "Repair, replace, or reinforce damaged wood as necessary."],
     cost: 1875,
-    note: "1 marked spot, top jog corner. Minor damage may be scraped and patched with wood filler/bondo. Current widths and grades of wood members may not be available.",
-  },
+    note: "1 marked spot, top jog corner. Minor damage may be scraped and patched with wood filler/bondo. Current widths and grades of wood members may not be available."
+  }
 };
 
 // Every individual mark on the actual diagram — one pin each, nothing merged.
 // Traced directly off the report's diagram, region by region, verified count: 19 total.
 const INSTANCES = [
-  // top-left corner: 2B, 2A stacked
-  { uid: "2B-1", group: "2B", x: 70, y: 90 },
-  { uid: "2A-1", group: "2A", x: 70, y: 108 },
-  // top jog corner: 3A (apex), 2B (stepped wall just after)
-  { uid: "3A-1", group: "3A", x: 195, y: 92 },
-  { uid: "2B-2", group: "2B", x: 215, y: 120 },
-  // right wall: 2C
-  { uid: "2C-1", group: "2C", x: 390, y: 170 },
-  // garage corner (bottom of right wall): 2E, 2A stacked
-  { uid: "2E-1", group: "2E", x: 378, y: 222 },
-  { uid: "2A-2", group: "2A", x: 402, y: 232 },
-  // entry left post: 2G, 2A stacked
-  { uid: "2G-1", group: "2G", x: 172, y: 205 },
-  { uid: "2A-3", group: "2A", x: 172, y: 223 },
-  // entry right post: 2A
-  { uid: "2A-4", group: "2A", x: 243, y: 213 },
-  // bottom wall, left segment (left corner to entry): 2E, 2E, 2F, 2E, 2E
-  { uid: "2E-2", group: "2E", x: 85, y: 238 },
-  { uid: "2E-3", group: "2E", x: 108, y: 238 },
-  { uid: "2F-1", group: "2F", x: 131, y: 238 },
-  { uid: "2E-4", group: "2E", x: 154, y: 238 },
-  { uid: "2E-5", group: "2E", x: 177, y: 238 },
-  // bottom wall, cluster right of entry (support beam area): 2B, 2B, 2D, 2D
-  { uid: "2B-3", group: "2B", x: 235, y: 238 },
-  { uid: "2B-4", group: "2B", x: 250, y: 238 },
-  { uid: "2D-1", group: "2D", x: 265, y: 238 },
-  { uid: "2D-2", group: "2D", x: 280, y: 238 },
-];
-
-const NOTES = [
-  {
-    id: "Note A",
-    text: "This is a limited inspection and report, at the request of the owner / association / agent, and pertains to noted findings on diagram area only.",
-  },
-  {
-    id: "Note B",
-    text: "Repair cost ($1,875.00) includes repairs to items 2A, 2B, 2C, 2D, 2E, and 2G. (As printed on report — this dollar figure matches 3A's line-item cost, not 2A's $1,985 total; flagged here verbatim, not corrected.)",
-  },
-];
-
+// top-left corner: 2B, 2A stacked
+{
+  uid: "2B-1",
+  group: "2B",
+  x: 70,
+  y: 90
+}, {
+  uid: "2A-1",
+  group: "2A",
+  x: 70,
+  y: 108
+},
+// top jog corner: 3A (apex), 2B (stepped wall just after)
+{
+  uid: "3A-1",
+  group: "3A",
+  x: 195,
+  y: 92
+}, {
+  uid: "2B-2",
+  group: "2B",
+  x: 215,
+  y: 120
+},
+// right wall: 2C
+{
+  uid: "2C-1",
+  group: "2C",
+  x: 390,
+  y: 170
+},
+// garage corner (bottom of right wall): 2E, 2A stacked
+{
+  uid: "2E-1",
+  group: "2E",
+  x: 378,
+  y: 222
+}, {
+  uid: "2A-2",
+  group: "2A",
+  x: 402,
+  y: 232
+},
+// entry left post: 2G, 2A stacked
+{
+  uid: "2G-1",
+  group: "2G",
+  x: 172,
+  y: 205
+}, {
+  uid: "2A-3",
+  group: "2A",
+  x: 172,
+  y: 223
+},
+// entry right post: 2A
+{
+  uid: "2A-4",
+  group: "2A",
+  x: 243,
+  y: 213
+},
+// bottom wall, left segment (left corner to entry): 2E, 2E, 2F, 2E, 2E
+{
+  uid: "2E-2",
+  group: "2E",
+  x: 85,
+  y: 238
+}, {
+  uid: "2E-3",
+  group: "2E",
+  x: 108,
+  y: 238
+}, {
+  uid: "2F-1",
+  group: "2F",
+  x: 131,
+  y: 238
+}, {
+  uid: "2E-4",
+  group: "2E",
+  x: 154,
+  y: 238
+}, {
+  uid: "2E-5",
+  group: "2E",
+  x: 177,
+  y: 238
+},
+// bottom wall, cluster right of entry (support beam area): 2B, 2B, 2D, 2D
+{
+  uid: "2B-3",
+  group: "2B",
+  x: 235,
+  y: 238
+}, {
+  uid: "2B-4",
+  group: "2B",
+  x: 250,
+  y: 238
+}, {
+  uid: "2D-1",
+  group: "2D",
+  x: 265,
+  y: 238
+}, {
+  uid: "2D-2",
+  group: "2D",
+  x: 280,
+  y: 238
+}];
+const NOTES = [{
+  id: "Note A",
+  text: "This is a limited inspection and report, at the request of the owner / association / agent, and pertains to noted findings on diagram area only."
+}, {
+  id: "Note B",
+  text: "Repair cost ($1,875.00) includes repairs to items 2A, 2B, 2C, 2D, 2E, and 2G. (As printed on report — this dollar figure matches 3A's line-item cost, not 2A's $1,985 total; flagged here verbatim, not corrected.)"
+}];
 const GRAND_TOTAL = 3860;
 const GROUP_ORDER = ["2A", "2B", "2C", "2D", "2E", "2F", "2G", "3A"];
-
 function groupCount(id) {
-  return INSTANCES.filter((i) => i.group === id).length;
+  return INSTANCES.filter(i => i.group === id).length;
 }
-
-const TYPES = [
-  { id: "sub", label: "Subterranean", color: "#2563eb" },
-  { id: "dry", label: "Drywood", color: "#dc2626" },
-  { id: "fungus", label: "Fungus/Dryrot", color: "#ca8a04" },
-];
+const TYPES = [{
+  id: "sub",
+  label: "Subterranean",
+  color: "#2563eb"
+}, {
+  id: "dry",
+  label: "Drywood",
+  color: "#dc2626"
+}, {
+  id: "fungus",
+  label: "Fungus/Dryrot",
+  color: "#ca8a04"
+}];
 
 // Auto-suggested materials by finding type — your usual Dixieline pick list.
 const MATERIALS_BY_TYPE = {
   sub: {
     label: "Subterranean Termite",
     color: "#2563eb",
-    items: [
-      "Termiticide (Fipronil) — Termidor SC or Taurus SC",
-      "Drill bits for slab/soil injection (if trenching not used)",
-      "Shelter tube removal — scraper/putty knife",
-    ],
+    items: ["Termiticide (Fipronil) — Termidor SC or Taurus SC", "Drill bits for slab/soil injection (if trenching not used)", "Shelter tube removal — scraper/putty knife"]
   },
   dry: {
     label: "Drywood Termite",
     color: "#dc2626",
-    items: [
-      "Wood filler / Bondo (touch-up on minor damage)",
-      "Matching dimensional lumber for framing replacement",
-      "Construction adhesive",
-      "Exterior wood screws / nails",
-      "Sandpaper (finish patched areas)",
-    ],
+    items: ["Wood filler / Bondo (touch-up on minor damage)", "Matching dimensional lumber for framing replacement", "Construction adhesive", "Exterior wood screws / nails", "Sandpaper (finish patched areas)"]
   },
   fungus: {
     label: "Fungus / Dryrot",
     color: "#ca8a04",
-    items: [
-      "Exterior wood filler",
-      "Scraper / chisel (remove infected wood)",
-      "Primer + exterior paint to match (if repair is visible)",
-    ],
-  },
+    items: ["Exterior wood filler", "Scraper / chisel (remove infected wood)", "Primer + exterior paint to match (if repair is visible)"]
+  }
 };
-
 const JOB_KEY = "2937-e-barnwell-st-16400"; // report#-based key, unique per job, used for persistent storage
 
 function usePresentTypes() {
-  const present = new Set(INSTANCES.map((i) => GROUPS[i.group].type));
-  return TYPES.filter((t) => present.has(t.id));
+  const present = new Set(INSTANCES.map(i => GROUPS[i.group].type));
+  return TYPES.filter(t => present.has(t.id));
 }
-
 function defaultMaterialsState() {
   const state = {};
-  Object.keys(MATERIALS_BY_TYPE).forEach((typeId) => {
+  Object.keys(MATERIALS_BY_TYPE).forEach(typeId => {
     state[typeId] = MATERIALS_BY_TYPE[typeId].items.map((text, i) => ({
       id: `${typeId}-default-${i}`,
       text,
-      checked: false,
+      checked: false
     }));
   });
   return state;
 }
-
 function BarnwellJob() {
   const [tab, setTab] = useState("diagram");
   const [selected, setSelected] = useState(null); // uid of selected instance
   const [done, setDone] = useState({}); // uid -> bool
-  const [visibleTypes, setVisibleTypes] = useState({ sub: true, dry: true, fungus: true });
-  const [visibleGroups, setVisibleGroups] = useState(
-    GROUP_ORDER.reduce((acc, id) => ({ ...acc, [id]: true }), {})
-  );
+  const [visibleTypes, setVisibleTypes] = useState({
+    sub: true,
+    dry: true,
+    fungus: true
+  });
+  const [visibleGroups, setVisibleGroups] = useState(GROUP_ORDER.reduce((acc, id) => ({
+    ...acc,
+    [id]: true
+  }), {}));
   const [materialsByType, setMaterialsByType] = useState(null); // null = still loading from storage
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [storageError, setStorageError] = useState(false);
   const [customInput, setCustomInput] = useState("");
   const [customType, setCustomType] = useState("dry");
-
   const presentTypes = usePresentTypes();
 
   // Load saved materials + progress on mount
@@ -324,25 +366,29 @@ function BarnwellJob() {
       }
     })();
   }, [materialsByType]);
-
   const addMaterialItem = (typeId, text) => {
     const trimmed = text.trim();
     if (!trimmed) return;
-    setMaterialsByType((m) => ({
+    setMaterialsByType(m => ({
       ...m,
-      [typeId]: [...(m[typeId] || []), { id: `${typeId}-${Date.now()}`, text: trimmed, checked: false }],
+      [typeId]: [...(m[typeId] || []), {
+        id: `${typeId}-${Date.now()}`,
+        text: trimmed,
+        checked: false
+      }]
     }));
   };
-  const toggleMaterialItem = (typeId, id) =>
-    setMaterialsByType((m) => ({
-      ...m,
-      [typeId]: m[typeId].map((it) => (it.id === id ? { ...it, checked: !it.checked } : it)),
-    }));
-  const removeMaterialItem = (typeId, id) =>
-    setMaterialsByType((m) => ({
-      ...m,
-      [typeId]: m[typeId].filter((it) => it.id !== id),
-    }));
+  const toggleMaterialItem = (typeId, id) => setMaterialsByType(m => ({
+    ...m,
+    [typeId]: m[typeId].map(it => it.id === id ? {
+      ...it,
+      checked: !it.checked
+    } : it)
+  }));
+  const removeMaterialItem = (typeId, id) => setMaterialsByType(m => ({
+    ...m,
+    [typeId]: m[typeId].filter(it => it.id !== id)
+  }));
   const startEditItem = (id, currentText) => {
     setEditingId(id);
     setEditingText(currentText);
@@ -350,9 +396,12 @@ function BarnwellJob() {
   const saveEditItem = (typeId, id) => {
     const trimmed = editingText.trim();
     if (trimmed) {
-      setMaterialsByType((m) => ({
+      setMaterialsByType(m => ({
         ...m,
-        [typeId]: m[typeId].map((it) => (it.id === id ? { ...it, text: trimmed } : it)),
+        [typeId]: m[typeId].map(it => it.id === id ? {
+          ...it,
+          text: trimmed
+        } : it)
       }));
     }
     setEditingId(null);
@@ -362,470 +411,793 @@ function BarnwellJob() {
     setEditingId(null);
     setEditingText("");
   };
-
-  const allOn = TYPES.every((t) => visibleTypes[t.id]);
-  const showAll = () => setVisibleTypes({ sub: true, dry: true, fungus: true });
-  const toggleType = (id) => setVisibleTypes((v) => ({ ...v, [id]: !v[id] }));
-
-  const allGroupsOn = GROUP_ORDER.every((id) => visibleGroups[id]);
-  const showAllGroups = () => setVisibleGroups(GROUP_ORDER.reduce((acc, id) => ({ ...acc, [id]: true }), {}));
-  const toggleGroup = (id) => setVisibleGroups((v) => ({ ...v, [id]: !v[id] }));
-
-  const visibleInstances = INSTANCES.filter(
-    (inst) => visibleTypes[GROUPS[inst.group].type] && visibleGroups[inst.group]
-  );
-
+  const allOn = TYPES.every(t => visibleTypes[t.id]);
+  const showAll = () => setVisibleTypes({
+    sub: true,
+    dry: true,
+    fungus: true
+  });
+  const toggleType = id => setVisibleTypes(v => ({
+    ...v,
+    [id]: !v[id]
+  }));
+  const allGroupsOn = GROUP_ORDER.every(id => visibleGroups[id]);
+  const showAllGroups = () => setVisibleGroups(GROUP_ORDER.reduce((acc, id) => ({
+    ...acc,
+    [id]: true
+  }), {}));
+  const toggleGroup = id => setVisibleGroups(v => ({
+    ...v,
+    [id]: !v[id]
+  }));
+  const visibleInstances = INSTANCES.filter(inst => visibleTypes[GROUPS[inst.group].type] && visibleGroups[inst.group]);
   const doneCount = Object.values(done).filter(Boolean).length;
   const total = INSTANCES.length;
-  const pct = Math.round((doneCount / total) * 100);
-
-  const toggleDone = (uid) =>
-    setDone((d) => {
-      const next = { ...d, [uid]: !d[uid] };
-      (async () => {
-        try {
-          await window.storage.set(`progress:${JOB_KEY}`, JSON.stringify(next));
-        } catch (e) {
-          // best effort; progress just won't persist this time
-        }
-      })();
-      return next;
-    });
-  const rawSelected = INSTANCES.find((i) => i.uid === selected);
-  const selectedInstance =
-    rawSelected && visibleTypes[GROUPS[rawSelected.group].type] && visibleGroups[rawSelected.group]
-      ? rawSelected
-      : null;
+  const pct = Math.round(doneCount / total * 100);
+  const toggleDone = uid => setDone(d => {
+    const next = {
+      ...d,
+      [uid]: !d[uid]
+    };
+    (async () => {
+      try {
+        await window.storage.set(`progress:${JOB_KEY}`, JSON.stringify(next));
+      } catch (e) {
+        // best effort; progress just won't persist this time
+      }
+    })();
+    return next;
+  });
+  const rawSelected = INSTANCES.find(i => i.uid === selected);
+  const selectedInstance = rawSelected && visibleTypes[GROUPS[rawSelected.group].type] && visibleGroups[rawSelected.group] ? rawSelected : null;
   const selectedGroup = selectedInstance ? GROUPS[selectedInstance.group] : null;
-
-  const TabButton = ({ id, label }) => (
-    <button
-      onClick={() => setTab(id)}
-      style={{
-        flex: 1,
-        padding: "10px 4px",
+  const TabButton = ({
+    id,
+    label
+  }) => /*#__PURE__*/React.createElement("button", {
+    onClick: () => setTab(id),
+    style: {
+      flex: 1,
+      padding: "10px 4px",
+      fontSize: 13,
+      fontWeight: 600,
+      border: "none",
+      borderBottom: tab === id ? "3px solid #111827" : "3px solid transparent",
+      background: "transparent",
+      color: tab === id ? "#111827" : "#9ca3af"
+    }
+  }, label);
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: "system-ui, sans-serif",
+      maxWidth: 480,
+      margin: "0 auto",
+      background: "#fff"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "12px 16px",
+      borderBottom: "1px solid #e5e7eb"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#6b7280",
+      fontWeight: 600,
+      letterSpacing: 0.5
+    }
+  }, "AGPEST JOB REF"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 18,
+      fontWeight: 800,
+      color: "#111827"
+    }
+  }, "2937 E. Barnwell St, Oceanside"), /*#__PURE__*/React.createElement("a", {
+    href: "https://www.google.com/maps/search/?api=1&query=2937+E.+Barnwell+St+Oceanside+CA+92054",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    style: {
+      fontSize: 12,
+      color: "#2563eb",
+      fontWeight: 600,
+      textDecoration: "none"
+    }
+  }, "📍 Open in Google Maps"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("a", {
+    href: "https://www.google.com/maps/search/?api=1&query=Dixieline+Lumber+561+N+Tulip+St+Escondido+CA+92025",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    style: {
+      fontSize: 12,
+      color: "#b45309",
+      fontWeight: 600,
+      textDecoration: "none"
+    }
+  }, "🪵 Nearest Dixieline (Escondido, ~10 mi)"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#6b7280",
+      marginTop: 2
+    }
+  }, "Report #16400 · Inspected by David Beezer · 07/01/2026"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8,
+      background: "#f3f4f6",
+      borderRadius: 999,
+      height: 8,
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: `${pct}%`,
+      background: "#16a34a",
+      height: "100%",
+      transition: "width .2s"
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#6b7280",
+      marginTop: 4
+    }
+  }, doneCount, " of ", total, " marked locations done")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      borderBottom: "1px solid #e5e7eb"
+    }
+  }, /*#__PURE__*/React.createElement(TabButton, {
+    id: "diagram",
+    label: "Diagram"
+  }), /*#__PURE__*/React.createElement(TabButton, {
+    id: "repair",
+    label: "Repair"
+  }), /*#__PURE__*/React.createElement(TabButton, {
+    id: "materials",
+    label: "Materials"
+  }), /*#__PURE__*/React.createElement(TabButton, {
+    id: "other",
+    label: "Other"
+  }), /*#__PURE__*/React.createElement(TabButton, {
+    id: "cost",
+    label: "Cost"
+  })), tab === "diagram" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fef3c7",
+      border: "1px solid #fde68a",
+      borderRadius: 8,
+      padding: "8px 10px",
+      fontSize: 12,
+      color: "#92400e",
+      marginBottom: 10
+    }
+  }, "⚠ Limited report — findings on diagram area only (Note A). Roof exterior surface was not inspected."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 10,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: showAll,
+    style: {
+      padding: "6px 12px",
+      borderRadius: 999,
+      fontSize: 12,
+      fontWeight: 700,
+      border: allOn ? "1px solid #111827" : "1px solid #d1d5db",
+      background: allOn ? "#111827" : "#fff",
+      color: allOn ? "#fff" : "#374151"
+    }
+  }, "All"), TYPES.map(t => {
+    const on = visibleTypes[t.id];
+    return /*#__PURE__*/React.createElement("button", {
+      key: t.id,
+      onClick: () => toggleType(t.id),
+      style: {
+        padding: "6px 12px",
+        borderRadius: 999,
+        fontSize: 12,
+        fontWeight: 700,
+        border: `1px solid ${on ? t.color : "#d1d5db"}`,
+        background: on ? t.color : "#fff",
+        color: on ? "#fff" : "#9ca3af",
+        display: "flex",
+        alignItems: "center",
+        gap: 5
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 8,
+        height: 8,
+        borderRadius: "50%",
+        background: on ? "#fff" : t.color,
+        display: "inline-block"
+      }
+    }), t.label);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 10,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: showAllGroups,
+    style: {
+      padding: "5px 10px",
+      borderRadius: 999,
+      fontSize: 11,
+      fontWeight: 700,
+      border: allGroupsOn ? "1px solid #111827" : "1px solid #d1d5db",
+      background: allGroupsOn ? "#111827" : "#fff",
+      color: allGroupsOn ? "#fff" : "#374151"
+    }
+  }, "All markings"), GROUP_ORDER.map(id => {
+    const g = GROUPS[id];
+    const on = visibleGroups[id];
+    return /*#__PURE__*/React.createElement("button", {
+      key: id,
+      onClick: () => toggleGroup(id),
+      style: {
+        padding: "5px 10px",
+        borderRadius: 999,
+        fontSize: 11,
+        fontWeight: 700,
+        border: `1px solid ${on ? g.color : "#d1d5db"}`,
+        background: on ? g.color : "#fff",
+        color: on ? "#fff" : "#9ca3af"
+      }
+    }, id);
+  })), /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 460 360",
+    style: {
+      width: "100%",
+      background: "#f9fafb",
+      borderRadius: 8,
+      border: "1px solid #e5e7eb"
+    }
+  }, /*#__PURE__*/React.createElement("polyline", {
+    points: "70,100 195,100 195,114 390,114 390,230 230,230 230,200 185,200 185,230 70,230",
+    fill: "none",
+    stroke: "#111827",
+    strokeWidth: "3",
+    strokeLinejoin: "round"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "70",
+    y1: "100",
+    x2: "70",
+    y2: "230",
+    stroke: "#111827",
+    strokeWidth: "3"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "185",
+    y1: "200",
+    x2: "230",
+    y2: "200",
+    stroke: "#9ca3af",
+    strokeWidth: "2",
+    strokeDasharray: "6,5"
+  }), /*#__PURE__*/React.createElement("text", {
+    x: "207",
+    y: "192",
+    fontSize: "9",
+    textAnchor: "middle",
+    fill: "#6b7280"
+  }, "ENTRY"), /*#__PURE__*/React.createElement("text", {
+    x: "330",
+    y: "175",
+    fontSize: "11",
+    textAnchor: "middle",
+    fill: "#6b7280"
+  }, "GARAGE"), visibleInstances.map(inst => {
+    const g = GROUPS[inst.group];
+    const isDone = done[inst.uid];
+    return /*#__PURE__*/React.createElement("g", {
+      key: inst.uid,
+      onClick: () => setSelected(inst.uid),
+      style: {
+        cursor: "pointer"
+      },
+      opacity: isDone ? 0.35 : 1
+    }, /*#__PURE__*/React.createElement("circle", {
+      cx: inst.x,
+      cy: inst.y,
+      r: "11",
+      fill: g.color,
+      stroke: "#fff",
+      strokeWidth: "2"
+    }), /*#__PURE__*/React.createElement("text", {
+      x: inst.x,
+      y: inst.y + 3.5,
+      fontSize: "9",
+      fontWeight: "700",
+      textAnchor: "middle",
+      fill: "#fff"
+    }, inst.group));
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      fontSize: 12,
+      color: "#374151",
+      background: "#f3f4f6",
+      borderRadius: 8,
+      padding: "8px 10px"
+    }
+  }, "Showing ", /*#__PURE__*/React.createElement("strong", null, visibleInstances.length), " of 19 marked locations. Full breakdown: 2A ×4, 2B ×4, 2C ×1, 2D ×2, 2E ×5, 2F ×1, 2G ×1, 3A ×1."), selectedInstance && selectedGroup && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 12,
+      border: "1px solid #e5e7eb",
+      borderRadius: 10,
+      padding: 12,
+      background: "#fafafa"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "start"
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      fontSize: 15,
+      color: "#111827"
+    }
+  }, selectedInstance.group, " — ", selectedGroup.location), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: selectedGroup.color,
+      fontWeight: 700
+    }
+  }, selectedGroup.label, " · spot ", INSTANCES.filter(i => i.group === selectedInstance.group).findIndex(i => i.uid === selectedInstance.uid) + 1, " of ", groupCount(selectedInstance.group))), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setSelected(null),
+    style: {
+      border: "none",
+      background: "none",
+      fontSize: 16,
+      color: "#9ca3af"
+    }
+  }, "✕")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#374151",
+      marginTop: 8
+    }
+  }, selectedGroup.finding), selectedGroup.note && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#92400e",
+      marginTop: 6,
+      fontStyle: "italic"
+    }
+  }, selectedGroup.note), /*#__PURE__*/React.createElement("button", {
+    onClick: () => toggleDone(selectedInstance.uid),
+    style: {
+      marginTop: 10,
+      width: "100%",
+      padding: "10px 0",
+      borderRadius: 8,
+      border: "none",
+      fontWeight: 700,
+      fontSize: 13,
+      background: done[selectedInstance.uid] ? "#e5e7eb" : "#16a34a",
+      color: done[selectedInstance.uid] ? "#374151" : "#fff"
+    }
+  }, done[selectedInstance.uid] ? "Marked Done ✓ (tap to undo)" : "Mark This Spot Done"))), tab === "repair" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 12
+    }
+  }, GROUP_ORDER.map(id => {
+    const g = GROUPS[id];
+    const count = groupCount(id);
+    const doneInGroup = INSTANCES.filter(i => i.group === id && done[i.uid]).length;
+    return /*#__PURE__*/React.createElement("div", {
+      key: id,
+      style: {
+        border: "1px solid #e5e7eb",
+        borderRadius: 10,
+        padding: 12,
+        marginBottom: 10
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 800,
+        color: "#111827"
+      }
+    }, id, " — ", g.location), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 11,
+        fontWeight: 700,
+        color: g.color
+      }
+    }, g.label)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: "#6b7280",
+        marginTop: 2
+      }
+    }, count, " marked location", count > 1 ? "s" : "", " on diagram · ", doneInGroup, " of ", count, " done"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        margin: "8px 0 0",
+        paddingLeft: 18,
         fontSize: 13,
-        fontWeight: 600,
-        border: "none",
-        borderBottom: tab === id ? "3px solid #111827" : "3px solid transparent",
-        background: "transparent",
-        color: tab === id ? "#111827" : "#9ca3af",
-      }}
-    >
-      {label}
-    </button>
-  );
-
-  return (
-    <div style={{ fontFamily: "system-ui, sans-serif", maxWidth: 480, margin: "0 auto", background: "#fff" }}>
-      <div style={{ padding: "12px 16px", borderBottom: "1px solid #e5e7eb" }}>
-        <div style={{ fontSize: 12, color: "#6b7280", fontWeight: 600, letterSpacing: 0.5 }}>AGPEST JOB REF</div>
-        <div style={{ fontSize: 18, fontWeight: 800, color: "#111827" }}>2937 E. Barnwell St, Oceanside</div>
-        <a
-          href="https://www.google.com/maps/search/?api=1&query=2937+E.+Barnwell+St+Oceanside+CA+92054"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ fontSize: 12, color: "#2563eb", fontWeight: 600, textDecoration: "none" }}
-        >
-          📍 Open in Google Maps
-        </a>
-        <br />
-        <a
-          href="https://www.google.com/maps/search/?api=1&query=Dixieline+Lumber+561+N+Tulip+St+Escondido+CA+92025"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ fontSize: 12, color: "#b45309", fontWeight: 600, textDecoration: "none" }}
-        >
-          🪵 Nearest Dixieline (Escondido, ~10 mi)
-        </a>
-        <div style={{ fontSize: 12, color: "#6b7280", marginTop: 2 }}>Report #16400 · Inspected by David Beezer · 07/01/2026</div>
-        <div style={{ marginTop: 8, background: "#f3f4f6", borderRadius: 999, height: 8, overflow: "hidden" }}>
-          <div style={{ width: `${pct}%`, background: "#16a34a", height: "100%", transition: "width .2s" }} />
-        </div>
-        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 4 }}>
-          {doneCount} of {total} marked locations done
-        </div>
-      </div>
-
-      <div style={{ display: "flex", borderBottom: "1px solid #e5e7eb" }}>
-        <TabButton id="diagram" label="Diagram" />
-        <TabButton id="repair" label="Repair" />
-        <TabButton id="materials" label="Materials" />
-        <TabButton id="other" label="Other" />
-        <TabButton id="cost" label="Cost" />
-      </div>
-
-      {tab === "diagram" && (
-        <div style={{ padding: 12 }}>
-          <div style={{ background: "#fef3c7", border: "1px solid #fde68a", borderRadius: 8, padding: "8px 10px", fontSize: 12, color: "#92400e", marginBottom: 10 }}>
-            ⚠ Limited report — findings on diagram area only (Note A). Roof exterior surface was not inspected.
-          </div>
-
-          <div style={{ display: "flex", gap: 6, marginBottom: 10, flexWrap: "wrap" }}>
-            <button
-              onClick={showAll}
-              style={{
-                padding: "6px 12px",
-                borderRadius: 999,
-                fontSize: 12,
-                fontWeight: 700,
-                border: allOn ? "1px solid #111827" : "1px solid #d1d5db",
-                background: allOn ? "#111827" : "#fff",
-                color: allOn ? "#fff" : "#374151",
-              }}
-            >
-              All
-            </button>
-            {TYPES.map((t) => {
-              const on = visibleTypes[t.id];
-              return (
-                <button
-                  key={t.id}
-                  onClick={() => toggleType(t.id)}
-                  style={{
-                    padding: "6px 12px",
-                    borderRadius: 999,
-                    fontSize: 12,
-                    fontWeight: 700,
-                    border: `1px solid ${on ? t.color : "#d1d5db"}`,
-                    background: on ? t.color : "#fff",
-                    color: on ? "#fff" : "#9ca3af",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 5,
-                  }}
-                >
-                  <span
-                    style={{
-                      width: 8,
-                      height: 8,
-                      borderRadius: "50%",
-                      background: on ? "#fff" : t.color,
-                      display: "inline-block",
-                    }}
-                  />
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
-
-          <div style={{ display: "flex", gap: 6, marginBottom: 10, flexWrap: "wrap" }}>
-            <button
-              onClick={showAllGroups}
-              style={{
-                padding: "5px 10px",
-                borderRadius: 999,
-                fontSize: 11,
-                fontWeight: 700,
-                border: allGroupsOn ? "1px solid #111827" : "1px solid #d1d5db",
-                background: allGroupsOn ? "#111827" : "#fff",
-                color: allGroupsOn ? "#fff" : "#374151",
-              }}
-            >
-              All markings
-            </button>
-            {GROUP_ORDER.map((id) => {
-              const g = GROUPS[id];
-              const on = visibleGroups[id];
-              return (
-                <button
-                  key={id}
-                  onClick={() => toggleGroup(id)}
-                  style={{
-                    padding: "5px 10px",
-                    borderRadius: 999,
-                    fontSize: 11,
-                    fontWeight: 700,
-                    border: `1px solid ${on ? g.color : "#d1d5db"}`,
-                    background: on ? g.color : "#fff",
-                    color: on ? "#fff" : "#9ca3af",
-                  }}
-                >
-                  {id}
-                </button>
-              );
-            })}
-          </div>
-
-          <svg viewBox="0 0 460 360" style={{ width: "100%", background: "#f9fafb", borderRadius: 8, border: "1px solid #e5e7eb" }}>
-            <polyline
-              points="70,100 195,100 195,114 390,114 390,230 230,230 230,200 185,200 185,230 70,230"
-              fill="none"
-              stroke="#111827"
-              strokeWidth="3"
-              strokeLinejoin="round"
-            />
-            <line x1="70" y1="100" x2="70" y2="230" stroke="#111827" strokeWidth="3" />
-            <line x1="185" y1="200" x2="230" y2="200" stroke="#9ca3af" strokeWidth="2" strokeDasharray="6,5" />
-            <text x="207" y="192" fontSize="9" textAnchor="middle" fill="#6b7280">ENTRY</text>
-            <text x="330" y="175" fontSize="11" textAnchor="middle" fill="#6b7280">GARAGE</text>
-
-            {visibleInstances.map((inst) => {
-              const g = GROUPS[inst.group];
-              const isDone = done[inst.uid];
-              return (
-                <g
-                  key={inst.uid}
-                  onClick={() => setSelected(inst.uid)}
-                  style={{ cursor: "pointer" }}
-                  opacity={isDone ? 0.35 : 1}
-                >
-                  <circle cx={inst.x} cy={inst.y} r="11" fill={g.color} stroke="#fff" strokeWidth="2" />
-                  <text x={inst.x} y={inst.y + 3.5} fontSize="9" fontWeight="700" textAnchor="middle" fill="#fff">
-                    {inst.group}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
-
-          <div style={{ marginTop: 10, fontSize: 12, color: "#374151", background: "#f3f4f6", borderRadius: 8, padding: "8px 10px" }}>
-            Showing <strong>{visibleInstances.length}</strong> of 19 marked locations. Full breakdown: 2A ×4, 2B ×4, 2C ×1, 2D ×2, 2E ×5, 2F ×1, 2G ×1, 3A ×1.
-          </div>
-
-          {selectedInstance && selectedGroup && (
-            <div style={{ marginTop: 12, border: "1px solid #e5e7eb", borderRadius: 10, padding: 12, background: "#fafafa" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start" }}>
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: 15, color: "#111827" }}>
-                    {selectedInstance.group} — {selectedGroup.location}
-                  </div>
-                  <div style={{ fontSize: 12, color: selectedGroup.color, fontWeight: 700 }}>
-                    {selectedGroup.label} · spot {INSTANCES.filter((i) => i.group === selectedInstance.group).findIndex((i) => i.uid === selectedInstance.uid) + 1} of {groupCount(selectedInstance.group)}
-                  </div>
-                </div>
-                <button onClick={() => setSelected(null)} style={{ border: "none", background: "none", fontSize: 16, color: "#9ca3af" }}>✕</button>
-              </div>
-              <div style={{ fontSize: 13, color: "#374151", marginTop: 8 }}>{selectedGroup.finding}</div>
-              {selectedGroup.note && (
-                <div style={{ fontSize: 12, color: "#92400e", marginTop: 6, fontStyle: "italic" }}>{selectedGroup.note}</div>
-              )}
-              <button
-                onClick={() => toggleDone(selectedInstance.uid)}
-                style={{
-                  marginTop: 10,
-                  width: "100%",
-                  padding: "10px 0",
-                  borderRadius: 8,
-                  border: "none",
-                  fontWeight: 700,
-                  fontSize: 13,
-                  background: done[selectedInstance.uid] ? "#e5e7eb" : "#16a34a",
-                  color: done[selectedInstance.uid] ? "#374151" : "#fff",
-                }}
-              >
-                {done[selectedInstance.uid] ? "Marked Done ✓ (tap to undo)" : "Mark This Spot Done"}
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-
-      {tab === "repair" && (
-        <div style={{ padding: 12 }}>
-          {GROUP_ORDER.map((id) => {
-            const g = GROUPS[id];
-            const count = groupCount(id);
-            const doneInGroup = INSTANCES.filter((i) => i.group === id && done[i.uid]).length;
-            return (
-              <div key={id} style={{ border: "1px solid #e5e7eb", borderRadius: 10, padding: 12, marginBottom: 10 }}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div style={{ fontWeight: 800, color: "#111827" }}>{id} — {g.location}</div>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: g.color }}>{g.label}</span>
-                </div>
-                <div style={{ fontSize: 11, color: "#6b7280", marginTop: 2 }}>
-                  {count} marked location{count > 1 ? "s" : ""} on diagram · {doneInGroup} of {count} done
-                </div>
-                <ul style={{ margin: "8px 0 0", paddingLeft: 18, fontSize: 13, color: "#374151" }}>
-                  {g.repair.map((r, i) => (
-                    <li key={i} style={{ marginBottom: 4 }}>{r}</li>
-                  ))}
-                </ul>
-                {g.note && <div style={{ fontSize: 12, color: "#92400e", marginTop: 6, fontStyle: "italic" }}>{g.note}</div>}
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {tab === "materials" && (
-        <div style={{ padding: 12 }}>
-          <div style={{ fontSize: 12, color: "#6b7280", marginBottom: 12 }}>
-            Auto-suggested from what's on this job. Check off what you've got, tap ✎ to edit any item, ✕ to remove it. Saves automatically.
-          </div>
-
-          {storageError && (
-            <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 8, padding: "8px 10px", fontSize: 12, color: "#b91c1c", marginBottom: 10 }}>
-              ⚠ Couldn't save changes — check your connection and try again.
-            </div>
-          )}
-
-          {materialsByType === null ? (
-            <div style={{ fontSize: 13, color: "#9ca3af", padding: "20px 0", textAlign: "center" }}>Loading…</div>
-          ) : (
-            <>
-              {presentTypes.map((t) => {
-                const group = MATERIALS_BY_TYPE[t.id];
-                const items = materialsByType[t.id] || [];
-                return (
-                  <div key={t.id} style={{ border: "1px solid #e5e7eb", borderRadius: 10, padding: 12, marginBottom: 12 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
-                      <span style={{ width: 10, height: 10, borderRadius: "50%", background: group.color, display: "inline-block" }} />
-                      <div style={{ fontWeight: 800, fontSize: 14, color: "#111827" }}>{group.label}</div>
-                    </div>
-                    {items.length === 0 && (
-                      <div style={{ fontSize: 12, color: "#9ca3af", fontStyle: "italic", padding: "4px 0" }}>No items — add one below.</div>
-                    )}
-                    {items.map((item) => {
-                      const isEditing = editingId === item.id;
-                      if (isEditing) {
-                        return (
-                          <div key={item.id} style={{ display: "flex", gap: 6, alignItems: "center", padding: "6px 0" }}>
-                            <input
-                              autoFocus
-                              value={editingText}
-                              onChange={(e) => setEditingText(e.target.value)}
-                              onKeyDown={(e) => {
-                                if (e.key === "Enter") saveEditItem(t.id, item.id);
-                                if (e.key === "Escape") cancelEditItem();
-                              }}
-                              style={{ flex: 1, padding: "6px 8px", borderRadius: 6, border: "1px solid #2563eb", fontSize: 13 }}
-                            />
-                            <button onClick={() => saveEditItem(t.id, item.id)} style={{ border: "none", background: "#16a34a", color: "#fff", borderRadius: 6, padding: "6px 10px", fontSize: 12, fontWeight: 700 }}>Save</button>
-                            <button onClick={cancelEditItem} style={{ border: "none", background: "#e5e7eb", color: "#374151", borderRadius: 6, padding: "6px 10px", fontSize: 12 }}>✕</button>
-                          </div>
-                        );
-                      }
-                      return (
-                        <div key={item.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 0" }}>
-                          <label
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 8,
-                              fontSize: 13,
-                              flex: 1,
-                              color: item.checked ? "#9ca3af" : "#374151",
-                              textDecoration: item.checked ? "line-through" : "none",
-                              cursor: "pointer",
-                            }}
-                          >
-                            <input type="checkbox" checked={item.checked} onChange={() => toggleMaterialItem(t.id, item.id)} style={{ width: 16, height: 16, flexShrink: 0 }} />
-                            {item.text}
-                          </label>
-                          <button onClick={() => startEditItem(item.id, item.text)} style={{ border: "none", background: "none", color: "#9ca3af", fontSize: 14, padding: "2px 4px" }}>✎</button>
-                          <button onClick={() => removeMaterialItem(t.id, item.id)} style={{ border: "none", background: "none", color: "#d1d5db", fontSize: 14, padding: "2px 4px" }}>✕</button>
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              })}
-
-              <div style={{ border: "1px dashed #d1d5db", borderRadius: 10, padding: 12 }}>
-                <div style={{ fontWeight: 700, fontSize: 13, color: "#111827", marginBottom: 8 }}>Add something else</div>
-                <div style={{ display: "flex", gap: 6, marginBottom: 8, flexWrap: "wrap" }}>
-                  {presentTypes.map((t) => (
-                    <button
-                      key={t.id}
-                      onClick={() => setCustomType(t.id)}
-                      style={{
-                        padding: "5px 10px",
-                        borderRadius: 999,
-                        fontSize: 11,
-                        fontWeight: 700,
-                        border: `1px solid ${customType === t.id ? t.color : "#d1d5db"}`,
-                        background: customType === t.id ? t.color : "#fff",
-                        color: customType === t.id ? "#fff" : "#9ca3af",
-                      }}
-                    >
-                      {t.label}
-                    </button>
-                  ))}
-                </div>
-                <div style={{ display: "flex", gap: 6 }}>
-                  <input
-                    value={customInput}
-                    onChange={(e) => setCustomInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        addMaterialItem(customType, customInput);
-                        setCustomInput("");
-                      }
-                    }}
-                    placeholder="e.g. extra bondo, 2x4 studs..."
-                    style={{ flex: 1, padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 13 }}
-                  />
-                  <button
-                    onClick={() => {
-                      addMaterialItem(customType, customInput);
-                      setCustomInput("");
-                    }}
-                    style={{ padding: "8px 14px", borderRadius: 8, border: "none", background: "#111827", color: "#fff", fontWeight: 700, fontSize: 13 }}
-                  >
-                    Add
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      )}
-
-      {tab === "other" && (
-        <div style={{ padding: 12 }}>
-          <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 8, color: "#111827" }}>Notes</div>
-          {NOTES.map((n) => (
-            <div key={n.id} style={{ border: "1px solid #fde68a", background: "#fffbeb", borderRadius: 8, padding: 10, marginBottom: 8 }}>
-              <div style={{ fontWeight: 700, fontSize: 12, color: "#92400e" }}>{n.id}</div>
-              <div style={{ fontSize: 13, color: "#78350f", marginTop: 2 }}>{n.text}</div>
-            </div>
-          ))}
-          <div style={{ fontWeight: 800, fontSize: 14, margin: "14px 0 8px", color: "#111827" }}>General</div>
-          <div style={{ fontSize: 13, color: "#374151" }}>
-            One-story single-family residence, stucco exterior, composition roof, attached garage, on slab foundation.
-          </div>
-          <div style={{ fontSize: 13, color: "#374151", marginTop: 8 }}>
-            Guarantees: Fumigation 2 yrs · Local treatment 1 yr (treated area only) · Repair 1 yr · Caulking/grout/sealing of commodes 90 days.
-          </div>
-          <div style={{ fontSize: 12, color: "#6b7280", marginTop: 8, fontStyle: "italic" }}>
-            Roof exterior surface not inspected — contact a licensed roofing contractor for water-tightness. Facia/eave/roof-sheeting repair involving fungus damage may have related roofing leaks not covered by AGPEST.
-          </div>
-        </div>
-      )}
-
-      {tab === "cost" && (
-        <div style={{ padding: 12 }}>
-          {GROUP_ORDER.map((id) => {
-            const g = GROUPS[id];
-            const count = groupCount(id);
-            return (
-              <div key={id} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #f3f4f6" }}>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 13, color: "#111827" }}>{id} — {g.location}</div>
-                  <div style={{ fontSize: 11, color: g.color, fontWeight: 600 }}>{g.label} · {count} location{count > 1 ? "s" : ""}</div>
-                </div>
-                <div style={{ fontWeight: 800, fontSize: 14, color: g.cost ? "#111827" : "#9ca3af", textAlign: "right" }}>
-                  {g.cost ? `$${g.cost.toLocaleString()}` : g.costNote || "—"}
-                </div>
-              </div>
-            );
-          })}
-          <div style={{ marginTop: 16, background: "#111827", borderRadius: 10, padding: 14, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div style={{ color: "#e5e7eb", fontWeight: 700, fontSize: 13 }}>GRAND TOTAL</div>
-            <div style={{ color: "#fff", fontWeight: 900, fontSize: 20 }}>${GRAND_TOTAL.toLocaleString()}</div>
-          </div>
-          <div style={{ fontSize: 11, color: "#9ca3af", marginTop: 8 }}>
-            2A ($1,985) + 3A ($1,875) = $3,860. All of 2B–2G are fumigated/treated in conjunction with 2A at no added cost.
-          </div>
-        </div>
-      )}
-    </div>
-  );
+        color: "#374151"
+      }
+    }, g.repair.map((r, i) => /*#__PURE__*/React.createElement("li", {
+      key: i,
+      style: {
+        marginBottom: 4
+      }
+    }, r))), g.note && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#92400e",
+        marginTop: 6,
+        fontStyle: "italic"
+      }
+    }, g.note));
+  })), tab === "materials" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#6b7280",
+      marginBottom: 12
+    }
+  }, "Auto-suggested from what's on this job. Check off what you've got, tap ✎ to edit any item, ✕ to remove it. Saves automatically."), storageError && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#fef2f2",
+      border: "1px solid #fecaca",
+      borderRadius: 8,
+      padding: "8px 10px",
+      fontSize: 12,
+      color: "#b91c1c",
+      marginBottom: 10
+    }
+  }, "⚠ Couldn't save changes — check your connection and try again."), materialsByType === null ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#9ca3af",
+      padding: "20px 0",
+      textAlign: "center"
+    }
+  }, "Loading…") : /*#__PURE__*/React.createElement(React.Fragment, null, presentTypes.map(t => {
+    const group = MATERIALS_BY_TYPE[t.id];
+    const items = materialsByType[t.id] || [];
+    return /*#__PURE__*/React.createElement("div", {
+      key: t.id,
+      style: {
+        border: "1px solid #e5e7eb",
+        borderRadius: 10,
+        padding: 12,
+        marginBottom: 12
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+        marginBottom: 8
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 10,
+        height: 10,
+        borderRadius: "50%",
+        background: group.color,
+        display: "inline-block"
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 800,
+        fontSize: 14,
+        color: "#111827"
+      }
+    }, group.label)), items.length === 0 && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9ca3af",
+        fontStyle: "italic",
+        padding: "4px 0"
+      }
+    }, "No items — add one below."), items.map(item => {
+      const isEditing = editingId === item.id;
+      if (isEditing) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: item.id,
+          style: {
+            display: "flex",
+            gap: 6,
+            alignItems: "center",
+            padding: "6px 0"
+          }
+        }, /*#__PURE__*/React.createElement("input", {
+          autoFocus: true,
+          value: editingText,
+          onChange: e => setEditingText(e.target.value),
+          onKeyDown: e => {
+            if (e.key === "Enter") saveEditItem(t.id, item.id);
+            if (e.key === "Escape") cancelEditItem();
+          },
+          style: {
+            flex: 1,
+            padding: "6px 8px",
+            borderRadius: 6,
+            border: "1px solid #2563eb",
+            fontSize: 13
+          }
+        }), /*#__PURE__*/React.createElement("button", {
+          onClick: () => saveEditItem(t.id, item.id),
+          style: {
+            border: "none",
+            background: "#16a34a",
+            color: "#fff",
+            borderRadius: 6,
+            padding: "6px 10px",
+            fontSize: 12,
+            fontWeight: 700
+          }
+        }, "Save"), /*#__PURE__*/React.createElement("button", {
+          onClick: cancelEditItem,
+          style: {
+            border: "none",
+            background: "#e5e7eb",
+            color: "#374151",
+            borderRadius: 6,
+            padding: "6px 10px",
+            fontSize: 12
+          }
+        }, "✕"));
+      }
+      return /*#__PURE__*/React.createElement("div", {
+        key: item.id,
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          padding: "6px 0"
+        }
+      }, /*#__PURE__*/React.createElement("label", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          fontSize: 13,
+          flex: 1,
+          color: item.checked ? "#9ca3af" : "#374151",
+          textDecoration: item.checked ? "line-through" : "none",
+          cursor: "pointer"
+        }
+      }, /*#__PURE__*/React.createElement("input", {
+        type: "checkbox",
+        checked: item.checked,
+        onChange: () => toggleMaterialItem(t.id, item.id),
+        style: {
+          width: 16,
+          height: 16,
+          flexShrink: 0
+        }
+      }), item.text), /*#__PURE__*/React.createElement("button", {
+        onClick: () => startEditItem(item.id, item.text),
+        style: {
+          border: "none",
+          background: "none",
+          color: "#9ca3af",
+          fontSize: 14,
+          padding: "2px 4px"
+        }
+      }, "✎"), /*#__PURE__*/React.createElement("button", {
+        onClick: () => removeMaterialItem(t.id, item.id),
+        style: {
+          border: "none",
+          background: "none",
+          color: "#d1d5db",
+          fontSize: 14,
+          padding: "2px 4px"
+        }
+      }, "✕"));
+    }));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      border: "1px dashed #d1d5db",
+      borderRadius: 10,
+      padding: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 700,
+      fontSize: 13,
+      color: "#111827",
+      marginBottom: 8
+    }
+  }, "Add something else"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 8,
+      flexWrap: "wrap"
+    }
+  }, presentTypes.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    onClick: () => setCustomType(t.id),
+    style: {
+      padding: "5px 10px",
+      borderRadius: 999,
+      fontSize: 11,
+      fontWeight: 700,
+      border: `1px solid ${customType === t.id ? t.color : "#d1d5db"}`,
+      background: customType === t.id ? t.color : "#fff",
+      color: customType === t.id ? "#fff" : "#9ca3af"
+    }
+  }, t.label))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    value: customInput,
+    onChange: e => setCustomInput(e.target.value),
+    onKeyDown: e => {
+      if (e.key === "Enter") {
+        addMaterialItem(customType, customInput);
+        setCustomInput("");
+      }
+    },
+    placeholder: "e.g. extra bondo, 2x4 studs...",
+    style: {
+      flex: 1,
+      padding: "8px 10px",
+      borderRadius: 8,
+      border: "1px solid #d1d5db",
+      fontSize: 13
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      addMaterialItem(customType, customInput);
+      setCustomInput("");
+    },
+    style: {
+      padding: "8px 14px",
+      borderRadius: 8,
+      border: "none",
+      background: "#111827",
+      color: "#fff",
+      fontWeight: 700,
+      fontSize: 13
+    }
+  }, "Add"))))), tab === "other" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      fontSize: 14,
+      marginBottom: 8,
+      color: "#111827"
+    }
+  }, "Notes"), NOTES.map(n => /*#__PURE__*/React.createElement("div", {
+    key: n.id,
+    style: {
+      border: "1px solid #fde68a",
+      background: "#fffbeb",
+      borderRadius: 8,
+      padding: 10,
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 700,
+      fontSize: 12,
+      color: "#92400e"
+    }
+  }, n.id), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#78350f",
+      marginTop: 2
+    }
+  }, n.text))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      fontSize: 14,
+      margin: "14px 0 8px",
+      color: "#111827"
+    }
+  }, "General"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#374151"
+    }
+  }, "One-story single-family residence, stucco exterior, composition roof, attached garage, on slab foundation."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: "#374151",
+      marginTop: 8
+    }
+  }, "Guarantees: Fumigation 2 yrs · Local treatment 1 yr (treated area only) · Repair 1 yr · Caulking/grout/sealing of commodes 90 days."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#6b7280",
+      marginTop: 8,
+      fontStyle: "italic"
+    }
+  }, "Roof exterior surface not inspected — contact a licensed roofing contractor for water-tightness. Facia/eave/roof-sheeting repair involving fungus damage may have related roofing leaks not covered by AGPEST.")), tab === "cost" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 12
+    }
+  }, GROUP_ORDER.map(id => {
+    const g = GROUPS[id];
+    const count = groupCount(id);
+    return /*#__PURE__*/React.createElement("div", {
+      key: id,
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "10px 0",
+        borderBottom: "1px solid #f3f4f6"
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 700,
+        fontSize: 13,
+        color: "#111827"
+      }
+    }, id, " — ", g.location), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: g.color,
+        fontWeight: 600
+      }
+    }, g.label, " · ", count, " location", count > 1 ? "s" : "")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 800,
+        fontSize: 14,
+        color: g.cost ? "#111827" : "#9ca3af",
+        textAlign: "right"
+      }
+    }, g.cost ? `$${g.cost.toLocaleString()}` : g.costNote || "—"));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 16,
+      background: "#111827",
+      borderRadius: 10,
+      padding: 14,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "#e5e7eb",
+      fontWeight: 700,
+      fontSize: 13
+    }
+  }, "GRAND TOTAL"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "#fff",
+      fontWeight: 900,
+      fontSize: 20
+    }
+  }, "$", GRAND_TOTAL.toLocaleString())), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#9ca3af",
+      marginTop: 8
+    }
+  }, "2A ($1,985) + 3A ($1,875) = $3,860. All of 2B–2G are fumigated/treated in conjunction with 2A at no added cost.")));
 }
-
-ReactDOM.createRoot(document.getElementById("root")).render(<BarnwellJob />);
+ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(BarnwellJob, null));
 </script>
 </body>
 </html>
