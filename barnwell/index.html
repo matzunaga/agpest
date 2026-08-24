@@ -271,7 +271,7 @@ function defaultMaterialsState() {
   return state;
 }
 
-export default function BarnwellJob() {
+function BarnwellJob() {
   const [tab, setTab] = useState("diagram");
   const [selected, setSelected] = useState(null); // uid of selected instance
   const [done, setDone] = useState({}); // uid -> bool
