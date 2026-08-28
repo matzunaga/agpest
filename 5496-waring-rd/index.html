@@ -428,6 +428,14 @@ const MATERIALS_BY_TYPE = {
 };
 const JOB_KEY = "5496-waring-rd-16108"; // report#-based key, unique per job, used for persistent storage
 
+// Site imagery — no API key needed. Satellite uses the legacy maps.google.com
+// iframe embed trick (q=lat,lng&t=k&output=embed). Street View uses the
+// public Maps URL deep link (map_action=pano) which opens directly into the
+// panorama, in-app on phones — also key-free.
+const SITE_LAT = 32.797932;
+const SITE_LNG = -117.07242;
+const SATELLITE_EMBED_URL = `https://maps.google.com/maps?q=${SITE_LAT},${SITE_LNG}&t=k&z=19&output=embed`;
+const STREET_VIEW_URL = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${SITE_LAT},${SITE_LNG}&heading=0&pitch=0&fov=90`;
 function usePresentTypes() {
   const present = new Set(INSTANCES.map(i => GROUPS[i.group].type));
   return TYPES.filter(t => present.has(t.id));
@@ -684,6 +692,9 @@ function WaringJob() {
     id: "diagram",
     label: "Diagram"
   }), /*#__PURE__*/React.createElement(TabButton, {
+    id: "site",
+    label: "Site"
+  }), /*#__PURE__*/React.createElement(TabButton, {
     id: "repair",
     label: "Repair"
   }), /*#__PURE__*/React.createElement(TabButton, {
@@ -913,7 +924,58 @@ function WaringJob() {
       background: done[selectedInstance.uid] ? "#e5e7eb" : "#16a34a",
       color: done[selectedInstance.uid] ? "#374151" : "#fff"
     }
-  }, done[selectedInstance.uid] ? "Marked Done ✓ (tap to undo)" : "Mark This Spot Done"))), tab === "repair" && /*#__PURE__*/React.createElement("div", {
+  }, done[selectedInstance.uid] ? "Marked Done ✓ (tap to undo)" : "Mark This Spot Done"))), tab === "site" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      fontSize: 14,
+      marginBottom: 8,
+      color: "#111827"
+    }
+  }, "Satellite"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderRadius: 10,
+      overflow: "hidden",
+      border: "1px solid #e5e7eb"
+    }
+  }, /*#__PURE__*/React.createElement("iframe", {
+    title: "Satellite view of job site",
+    src: SATELLITE_EMBED_URL,
+    width: "100%",
+    height: "260",
+    style: {
+      border: 0,
+      display: "block"
+    },
+    loading: "lazy",
+    referrerPolicy: "no-referrer-when-downgrade"
+  })), /*#__PURE__*/React.createElement("a", {
+    href: STREET_VIEW_URL,
+    target: "_blank",
+    rel: "noopener noreferrer",
+    style: {
+      display: "block",
+      marginTop: 12,
+      textAlign: "center",
+      padding: "12px 0",
+      borderRadius: 8,
+      background: "#111827",
+      color: "#fff",
+      fontWeight: 700,
+      fontSize: 13,
+      textDecoration: "none"
+    }
+  }, "🧭 Open Street View"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#9ca3af",
+      marginTop: 8,
+      textAlign: "center"
+    }
+  }, "Both pulled from the property's coordinates — useful for a quick look before you're on site, or to double-check the address on arrival.")), tab === "repair" && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: 12
     }
